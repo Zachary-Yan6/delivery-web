@@ -74,10 +74,13 @@ export default function DriverDashboard() {
   const trackingActiveRef = useRef(false)
   const locationRequestInFlightRef = useRef(false)
 
+
+
   async function loadDeliveries() {
     try {
       const response = await api.get('/driver/deliveries')
       setDeliveries(response.data)
+
       setError('')
     } catch (requestError) {
       setError(getErrorMessage(requestError, 'Could not load your deliveries.'))

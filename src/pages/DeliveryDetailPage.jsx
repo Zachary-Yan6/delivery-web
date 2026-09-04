@@ -97,6 +97,25 @@ export default function DeliveryDetailPage() {
     }
   }
 
+  async function autoAssignDriver() {
+    try {
+      setError('')
+
+      await api.post(
+          `/deliveries/${id}/auto-assignment`,
+      )
+
+      await loadData()
+    } catch (requestError) {
+      setError(
+          getErrorMessage(
+              requestError,
+              'Could not automatically assign a driver.',
+          ),
+      )
+    }
+  }
+
   async function updateDelivery(event) {
     event.preventDefault()
     try {
@@ -250,6 +269,13 @@ export default function DeliveryDetailPage() {
                 {activeDrivers.map((driver) => <option key={driver.id} value={driver.id}>{driver.fullName} - {driver.phone}</option>)}
               </select>
               <button className="btn btn-primary" onClick={assignDriver} disabled={delivery.status !== 'CREATED'}>Assign</button>
+              <button
+                  className="btn btn-secondary"
+                  onClick={autoAssignDriver}
+                  disabled={delivery.status !== 'CREATED'}
+              >
+                Auto assign
+              </button>
             </div>
             {delivery.status !== 'CREATED' && <p className="panel-intro">This delivery has already been assigned and cannot be reassigned.</p>}
           </section>

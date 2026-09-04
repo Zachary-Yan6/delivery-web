@@ -17,10 +17,17 @@ export default function DispatcherDashboard() {
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
 
+  const [CurrentPage, setCurrentPage] = useState(null)
+  const [TotalPages, setTotalPages] = useState(null)
+  const [TotalElements, setTotalElements] = useState(null)
+
   async function loadDeliveries() {
     try {
       const response = await api.get('/deliveries')
-      setDeliveries(response.data)
+      setDeliveries(response.data.content)
+      setCurrentPage(response.data.page)
+      setTotalPages(response.data.totalPages)
+      setTotalElements(response.data.totalElements)
       setError('')
     } catch {
       setError('Could not load deliveries. Please refresh or sign in again.')

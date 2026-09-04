@@ -212,6 +212,29 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   margin: 10px 0 16px;
 }
 
+.websocket-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 12px 0 0;
+  font-size: 12px;
+  font-weight: 750;
+  text-transform: capitalize;
+}
+
+.websocket-status::before {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  content: '';
+}
+
+.websocket-status-connected { color: #047857; }
+.websocket-status-connecting,
+.websocket-status-reconnecting { color: #b45309; }
+.websocket-status-disconnected { color: #b91c1c; }
+
 .empty-map-state {
   color: #7b8798;
   font-size: 13px;
